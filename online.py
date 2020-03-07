@@ -165,11 +165,11 @@ class Episode:
         self.model.load_state_dict(saved_state)
 
         self.model_options = ModelOptions()
-        self.model_options.params = get_params(model, args.gpu_id)
+        self.model_options.params = get_params(self.model, args.gpu_id)
         
          
     def init_event(self):
-        self.event = controller.step(action='Initialize')
+        self.event = self.controller.step(action='Initialize')
     
     def init_agent(self):
         agent = Agent(self.args,self.model)
