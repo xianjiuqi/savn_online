@@ -202,7 +202,7 @@ class Episode:
                 self.model_options.params = SGD_step(self.model_options.params,inner_gradient, self.args.inner_lr)
     
     def isolated_step(self, image):
-        _,_, action = agent.action(self.model_options, self.image)
+        _,_, action = self.agent.action(self.model_options, image)
         return self.action_list[action[0,0]]
         
     def stop(self):
