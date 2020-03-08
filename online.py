@@ -193,7 +193,7 @@ class Episode:
                 learned_loss = compute_learned_loss(self.args, self.agent, self.args.gpu_id, self.model_options)
                 inner_gradient = torch.autograd.grad(
                         learned_loss["learned_loss"],
-                        [v for _, v in model_options.params.items()],
+                        [v for _, v in self.model_options.params.items()],
                         create_graph=True,
                         retain_graph=True,
                         allow_unused=True,
