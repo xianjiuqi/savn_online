@@ -37,6 +37,7 @@ class FakeArgs():
         self.model = model
         self.glove_file = GLOVE_FILE
         self.max_gradient_updates = 4
+        self.done=False
         
         
 class Agent():
@@ -144,6 +145,7 @@ class Episode:
         self.load_glove_embedding(glove_file_path)
         self.load_model(model_path, self.args)
         self.init_agent()
+        self.done = False
         
     def load_glove_embedding(self, glove_file):
         glove_embedding_dict = {}
@@ -179,28 +181,35 @@ class Episode:
         self.agent = agent
         
     def step(self):
-        if self.event == None:
-            self.init_event()
-        self.frame = self.event.frame
-        _,_, action = self.agent.action(self.model_options, self.frame)
-        self.event = self.controller.step(action=self.action_list[action[0,0]])
-        self.step_count += 1
-        #print(self.args.learned_loss)
-        if self.args.learned_loss:
-            if self.step_count % self.args.num_steps == 0 \
-                and self.step_count/self.args.num_steps < self.args.max_gradient_updates:
-                
-                learned_loss = compute_learned_loss(self.args, self.agent, self.args.gpu_id, self.model_options)
-                inner_gradient = torch.autograd.grad(
-                        learned_loss["learned_loss"],
-                        [v for _, v in self.model_options.params.items()],
-                        create_graph=True,
-                        retain_graph=True,
-                        allow_unused=True,
-                    )
-                print("gradient update")
-                self.model_options.params = SGD_step(self.model_options.params,inner_gradient, self.args.inner_lr)
+        if not self.done:
+            if self.event == None:
+                self.init_event()
+            self.frame = self.event.frame
+            _,_, action = self.agent.action(self.model_options, self.frame)
+            if action[0,0] == 5: 
+                print("Agent Done")
+                self.done = True
+            print(self.action_list[action[0,0]])
+            self.event = self.controller.step(action=self.action_list[action[0,0]])
+            self.step_count += 1
+            #print(self.args.learned_loss)
+            if self.args.learned_loss:
+                if self.step_count % self.args.num_steps == 0 \
+                    and self.step_count/self.args.num_steps < self.args.max_gradient_updates:
+                    
+                    learned_loss = compute_learned_loss(self.args, self.agent, self.args.gpu_id, self.model_options)
+                    inner_gradient = torch.autograd.grad(
+                            learned_loss["learned_loss"],
+                            [v for _, v in self.model_options.params.items()],
+                            create_graph=True,
+                            retain_graph=True,
+                            allow_unused=True,
+                        )
+                    print("gradient update")
+                    self.model_options.params = SGD_step(self.model_options.params,inner_gradient, self.args.inner_lr)
     
+        else:
+            print("agent done")
     def isolated_step(self, image):
         _,_, action = self.agent.action(self.model_options, image)
         return self.action_list[action[0,0]]
