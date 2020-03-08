@@ -1,22 +1,22 @@
-
-
 ## Setup
 
 - Clone the repository with `git clone https://github.com/xianjiuqi/savn_online.git && cd savn_online`.
 
-- Install the necessary packages. If you are using pip then simply run `pip install -r requirements.txt`.
-
-- Download the [pretrained models](https://prior-datasets.s3.us-east-2.amazonaws.com/savn/pretrained_models.tar.gz) to the `savn_online` directory. Untar with
+- Run `wget https://prior-datasets.s3.us-east-2.amazonaws.com/savn/pretrained_models.tar.gz`
+Untar with
 ```bash
 tar -xzf pretrained_models.tar.gz
 ```
 
 ## Run Pretrained Models in Ai2thor 2.2.0
-#### see a quick demo on jupyter notebook. If you haven't install Jupyter Notebook, do
-```bash
-pip install jupyter
-```
-Open `online.ipynb` and run all the cells
+#### See a quick demo on jupyter notebook. (Tested on Macbook Pro)
+First create a conda environment. Assume miniconda3 is installed.
+Run `conda create -n savn-online python=3.7`
+In savn-onine folder, run `pip install -r requirements.txt`
+Run `pip install jupyter`
+Run `jupyter notebook`
+Open `savn-online/online.ipynb` and run all the cells
+
 #### Using our API
 ```bash
 import online
