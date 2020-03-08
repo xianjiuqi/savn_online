@@ -16,7 +16,7 @@ The `data` folder contains:
 ** If you want to train the model, then you will need the offline-data which can obtained by downloading from this link - https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz. Delete the current `data` folder, and extract the downloaded compressed data into project home folder. Training instructions ##
 
 
-## Setup on local machine
+## Setup on local machine (Tested with MacBook Pro)
 
 - Clone the repository with `git clone https://github.com/xianjiuqi/savn_online.git && cd savn_online`.
 
