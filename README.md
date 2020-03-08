@@ -6,16 +6,6 @@ In recent years, there has been a lot of progress in visual navigation but it is
 In the savn(https://github.com/allenai/savn) repo we based on, currenlty the agent is trained and tested in an offline Ai2thro environment, created by scraping images from a live environment and it is difficult to directly use the trained navigation models to a live Ai2thor environment. As part of our project, we aim to provide APIs so that users to create a live agent in a live Ai2thor simulator, where this agent uses pretrained models for visual navigation tasks. 
 
 
-## Data for the Model
-The `data` folder contains:
-
-- `thor_glove` which contains the [GloVe](https://nlp.stanford.edu/projects/glove/) embeddings for the navigation targets.
-
-- `gcn` which contains the necessary data for the [Graph Convolutional Network (GCN)](https://arxiv.org/abs/1609.02907) in [Scene Priors](https://arxiv.org/abs/1810.06543), including the adjacency matrix.
-
-** If you want to train the model, then you will need the offline-data which can obtained by downloading from this link - https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz. Delete the current `data` folder, and extract the downloaded compressed data into project home folder. Training instructions ##
-
-
 ## Setup on local machine (Tested with MacBook Pro)
 
 - Clone the repository with `git clone https://github.com/xianjiuqi/savn_online.git && cd savn_online`.
@@ -29,6 +19,16 @@ tar -xzf pretrained_models.tar.gz
 - Run `conda create -n savn-online python=3.7`
 - Run `conda activate savn-online`
 - In savn-onine folder, run `pip install -r requirements.txt`
+
+
+## Data for the Model
+The `data` folder contains:
+
+- `thor_glove` which contains the [GloVe](https://nlp.stanford.edu/projects/glove/) embeddings for the navigation targets.
+
+- `gcn` which contains the necessary data for the [Graph Convolutional Network (GCN)](https://arxiv.org/abs/1609.02907) in [Scene Priors](https://arxiv.org/abs/1810.06543), including the adjacency matrix.
+
+** If you want to train the model, then you will need the offline-data which can obtained by downloading from this link - https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz. Delete the current `data` folder, and extract the downloaded compressed data into project home folder. Training instructions ##
 
 #### See a quick demo on jupyter notebook.
 Run `jupyter notebook`
