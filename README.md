@@ -1,6 +1,6 @@
 # Self Adaptive Visual Navigation
 
-In recent years, there has been a lot of progress in visual navigation but it is not at the level where you can call it state-of-art. The one distinguishing framework that is attempting to provide a state-of-art visual navigation ability is the Ai2thor framework which provides a self-adaptive agent which learns by learning to learn the environment. 
+In recent years, there has been a lot of progress in visual navigation but it is not at the level where you can call it is  state-of-art. The one distinguishing framework that is attempting to provide a state-of-art visual navigation ability is the Ai2thor framework which provides a self-adaptive agent which learns by learning to learn the environment. 
 
 ## Problem Statement
 
