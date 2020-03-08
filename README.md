@@ -13,7 +13,7 @@ tar -xzf pretrained_models.tar.gz
 - In savn-onine folder, run `pip install -r requirements.txt`
 
 ## Run Pretrained Models in Ai2thor 2.2.0
-#### See a quick demo on jupyter notebook. (Tested on Macbook Pro)
+#### See a quick demo on jupyter notebook. (Tested on Macbook Pro/ AWS / Docker)
 Run `jupyter notebook`
 Open `online.ipynb`
 
