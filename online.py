@@ -180,15 +180,15 @@ class Episode:
         agent.set_target(self.glove_embedding[self.target])
         self.agent = agent
         
-    def step(self):
+    def step(self): 
+        if self.event == None:
+            self.init_event()
+        self.frame = self.event.frame
+        _,_, action = self.agent.action(self.model_options, self.frame)
+        if action[0,0] == 5: 
+            print("Agent Done")
+            self.done = True
         if not self.done:
-            if self.event == None:
-                self.init_event()
-            self.frame = self.event.frame
-            _,_, action = self.agent.action(self.model_options, self.frame)
-            if action[0,0] == 5: 
-                print("Agent Done")
-                self.done = True
             print(self.action_list[action[0,0]])
             self.event = self.controller.step(action=self.action_list[action[0,0]])
             self.step_count += 1
@@ -208,8 +208,6 @@ class Episode:
                     print("gradient update")
                     self.model_options.params = SGD_step(self.model_options.params,inner_gradient, self.args.inner_lr)
     
-        else:
-            print("agent done")
     def isolated_step(self, image):
         _,_, action = self.agent.action(self.model_options, image)
         return self.action_list[action[0,0]]
