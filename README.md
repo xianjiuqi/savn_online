@@ -3,7 +3,7 @@
 In recent years, there has been a lot of progress in visual navigation but it is not at the level where you can call it is  state-of-art. The one distinguishing framework that is attempting to provide a state-of-art navigation framework is the Ai2thor framework which also provides physics engine, object interaction and more. (In oreder to learn more about Ai2Thor Framework  and the original work on Self-Adaptive Visual Navigation please refer to https://ai2thor.allenai.org/ and https://github.com/allenai/savn respectively.
 
 ## Problem Statement
-In the SAVN repo, currenlty the agent is trained and tested in an offline Ai2thro environment, created by scraping images from a live environment. And it is difficult to directly use the trained navigation models to a live Ai2thor environment. As part of our project, we aim to provide APIs for user to create a live agent in a live Ai2thor simulator, where this agent uses pretrained models for visual navigation tasks. 
+In the savn(https://github.com/allenai/savn) repo we based on, currenlty the agent is trained and tested in an offline Ai2thro environment, created by scraping images from a live environment. And it is difficult to directly use the trained navigation models to a live Ai2thor environment. As part of our project, we aim to provide APIs for user to create a live agent in a live Ai2thor simulator, where this agent uses pretrained models for visual navigation tasks. 
 
 
 
