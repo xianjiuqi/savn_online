@@ -45,9 +45,22 @@ If you want to train the models, please see https://github.com/allenai/savn for 
 
 ## Setup on docker 
 
+Please refer the Dockerfile for creating the SAVN Docker Image. the 
+
 
 
 ## Setup on AWS with docker 
 
+Choose the right image:
+Deep Learning AMI (Ubuntu 16.04) Version 26.0 (ami-025ed45832b817a35)
 
+This AMI comes with built support for nvidia drivers, docker environment.
+
+Launch the EC2 instance with P2.2xlarge instance type with GPU support.
+
+SSH into the launched EC2 instance by following instructions presented on Connect option.
+
+Pull the docker image with command : docker pull sundaramx/savn-online:1.3
+
+docker run --rm  -it --privileged -p 8888:8888 --hostname localhost sundaramx/savn-online:1.1
 
