@@ -57,7 +57,7 @@ Please refer the Dockerfile for creating the creating he
 Choose the right image:
 Deep Learning AMI (Ubuntu 16.04) Version 26.0 (ami-025ed45832b817a35)
 
-![Image description]
+![AWS AMI](./images/AMI.png)
 
 
 This AMI comes with built support for nvidia drivers, docker environment.
