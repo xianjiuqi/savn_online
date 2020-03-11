@@ -45,7 +45,7 @@ If you want to train the models, please see https://github.com/allenai/savn for 
 
 ## Setup on docker 
 
-Please refer the Dockerfile for creating the SAVN Docker Image. the 
+Please refer the Dockerfile for creating the creating he 
 
 
 
@@ -54,13 +54,23 @@ Please refer the Dockerfile for creating the SAVN Docker Image. the
 Choose the right image:
 Deep Learning AMI (Ubuntu 16.04) Version 26.0 (ami-025ed45832b817a35)
 
+![Image description]
+
+
 This AMI comes with built support for nvidia drivers, docker environment.
 
 Launch the EC2 instance with P2.2xlarge instance type with GPU support.
 
 SSH into the launched EC2 instance by following instructions presented on Connect option.
 
-Pull the docker image with command : docker pull sundaramx/savn-online:1.3
+Pull the docker image with command : docker pull sundaramx/savn-online:1.4
 
 docker run --rm  -it --privileged -p 8888:8888 --hostname localhost sundaramx/savn-online:1.1
+
+on a new bash terminal ssh into your AWS EC2 instance 
+
+ssh -i "certificate file" -L 8000:localhost:8888 ubuntu@your-ec2-instance.compute-1.amazonaws.com
+
+This way you can access the jupoyter notebook on your local machine and run the cells present in the notebook to test 
+the agent.
 
