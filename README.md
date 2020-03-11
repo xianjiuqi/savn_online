@@ -23,7 +23,7 @@ The `data` folder in `savn-online` contains:
 - `thor_glove` which contains the [GloVe](https://nlp.stanford.edu/projects/glove/) embeddings for the navigation targets.
 - `gcn` which contains the necessary data for the [Graph Convolutional Network (GCN)](https://arxiv.org/abs/1609.02907) in [Scene Priors](https://arxiv.org/abs/1810.06543), including the adjacency matrix.
 
-The above `data` only allows for inferencing. If you want to train and evaluate the models, please refer to "Train" section below. 
+The above `data` only allows for inferencing. If you want to train and evaluate the models, please refer to "Train and Evaluate" section below. 
 
 ### See a quick demo on jupyter notebook.
 After set-up, in command line, run `jupyter notebook`
@@ -37,7 +37,7 @@ Open `savn-online/online.ipynb` and run all the cells. On local machine, a displ
 If you want to run the demo on cloud in a Docker container, please follow instructions below. However, you may not able to get a visual display of the scene.
 
 
-# Training and Evaluation
+# Train and Evaluate
 We adopted instructions from https://github.com/allenai/savn
 
 ## Setup on docker 
