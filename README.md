@@ -3,7 +3,7 @@
 Visual Navigation is a task where an agent uses a RGB camera to navigate. In our task, the agent's goal is to find a target object in an indoor scene. In recent years, there has been a lot of progress in visual navigation but it is not at the level where you can call it is state-of-art. Ai2thor is a virtual-enviroment framework that provides photo-realistic scenes, physics engine, object interaction and more. (In oreder to learn more about Ai2Thor Framework  and the original work on Self-Adaptive Visual Navigation please refer to https://ai2thor.allenai.org/ and https://github.com/allenai/savn respectively.
 
 ## Problem Statement
-We based our work on [SAVN](https://github.com/allenai/savn), a target driven visual navigation model trained using meta-reinforcement learning. In SAVN is trained and tested in an offline Ai2thro environment, created by scraping images and ResNet features from a live environment for training efficiency. However, there is no script for inferencing that allows others to test the model in a live Ai2thor environmnent and get a qualitative evaluation. Thus, as part of our project, we aim to provide APIs so that users to create a live agent in a live Ai2thor simulator, where this agent uses pretrained models for visual navigation tasks. 
+We based our work on [SAVN](https://github.com/allenai/savn), a target driven visual navigation model trained using meta-reinforcement learning. In SAVN is trained and tested in an offline Ai2thro environment, created by scraping images and ResNet features from a live environment for training efficiency. However, there is no script for inferencing that allows others to test the model in a live Ai2thor environmnent and get a qualitative evaluation. Thus, as part of our project, we aim to provide APIs for users to create a live agent in a live Ai2thor simulator, where this agent uses pretrained models for visual navigation tasks. 
 
 ## Deliverables
 - A jupyter notebook that provides a simple interface for evaluating models in live Ai2thor Simulator
@@ -119,29 +119,6 @@ python full_eval.py \
 cat savn_results.json
 ```
 
-## Setup on Docker 
-
-We created the docker image and pushed our image to our docker hub.
-
-You can pull the latest docker image with command : `docker pull sundaramx/savn-online:1.4`
-
-Please refer the Dockerfile for details on dependencies for creating the docker image.
-
-Once you have the docker image on your local or AWS Environment, you can run the docker container with following options
-
-1)on AWS Env,  To access our online model execute
-
-`docker run -it --privileged -p 8888:8888 --hostname localhost sundaramx/savn-online:1.4`
-
-![AWS AMI](./images/DockerRun.png)
-
-and once the container is running you will need to ssh into the AWS EC2 with below command to access the notebook on your local browser
-
-`ssh -i "your certificate.pem" -L 8000:localhost:8888 ubuntu@ec2-54-164-eww5-179.compute-1.amazonaws.com`
-
-After this command, you can launch the browser and access the jupyter notebook as shown below
-
-![AWS AMI](./images/NotebookHome.png)
 
 
 
