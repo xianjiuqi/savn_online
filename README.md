@@ -42,8 +42,33 @@ We adopted instructions from https://github.com/allenai/savn
 
 ## Setup on docker 
 
-Please refer the Dockerfile for creating the creating he 
+Please refer the Dockerfile for the steps for creating the docker image.
 
+We created the docker image and pushed our image to our docker hub as shown below
+
+![AWS AMI](./images/DockerHubDockerImage.png)
+
+You can pull the latest docker image with command : docker pull sundaramx/savn-online:1.4
+
+once you have the docker image on your local or AWS Environment, you can run the docker container with following options
+
+1)on AWS Env,  To access our online model execute
+
+`docker run -it --privileged -p 8888:8888 --hostname localhost sundaramx/savn-online:1.4`
+
+![AWS AMI](./images/DockerRun.png)
+
+and once the container is running you will need to ssh into the AWS EC2 with below command to access the notebook on your local browser
+
+`ssh -i "your certificate.pem" -L 8000:localhost:8888 ubuntu@ec2-54-164-eww5-179.compute-1.amazonaws.com`
+
+After this command, you can launch the browser and access the jupyter notebook as shown below
+
+![AWS AMI](./images/NotebookHome.png)
+
+You may proceed to launch our online model and execute cells to test the Agent for visual navigation as shown below.
+
+![AWS AMI](./images/OnlineModel.png)
 
 
 ## Setup on AWS with docker 
@@ -62,7 +87,7 @@ SSH into the launched EC2 instance by following instructions presented on Connec
 
 Pull the docker image with command : docker pull sundaramx/savn-online:1.4
 
-docker run --rm  -it --privileged -p 8888:8888 --hostname localhost sundaramx/savn-online:1.1
+docker run --rm  -it --privileged -p 8888:8888 --hostname localhost sundaramx/savn-online:1.4
 
 
 on a new bash terminal ssh into your AWS EC2 instance 
