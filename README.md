@@ -42,7 +42,7 @@ We adopted instructions from https://github.com/allenai/savn
 
 ## Setup on docker 
 
-Please refer the Dockerfile for the steps for creating the docker image.
+Please refer the Dockerfile for details on dependencies for creating the docker image.
 
 We created the docker image and pushed our image to our docker hub as shown below
 
