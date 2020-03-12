@@ -54,6 +54,7 @@ If you just want to see how the models perform in a live Ai2thor environment, us
 - Pull the docker image with command : docker pull sundaramx/savn-online:1.4
 
 - Do `docker run --rm  -it --privileged -p 8888:8888 --hostname localhost sundaramx/savn-online:1.4`
+![AWS AMI](./images/DockerRun.png)
 
 - In a new bash terminal ssh into your AWS EC2 instance 
 ```
@@ -142,9 +143,7 @@ After this command, you can launch the browser and access the jupyter notebook a
 
 ![AWS AMI](./images/NotebookHome.png)
 
-You may proceed to launch our online model and execute cells to test the Agent for visual navigation as shown below.
 
-![AWS AMI](./images/OnlineModel.png)
 
 
 
