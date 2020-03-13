@@ -129,7 +129,7 @@ cat savn_results.json
 
 
 ### Known Issues on AWS Cloud :
-For some instances/ami type if the display server isn't automatically configured then you will the below error
+For some instances/ami type if the display server isn't automatically configured then you will see the below error while executing the cells within jupyter notebook
 
 ![AWS DISPLAY ISSUE](./images/AWSDisplayError.png)
 
