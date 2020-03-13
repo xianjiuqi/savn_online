@@ -6,8 +6,17 @@ Visual Navigation is a task where an agent uses a RGB camera to navigate. In our
 In the SAVN project, the models are trained and tested in an offline Ai2thor environment, created by scraping images and ResNet features from a live environment for training efficiency. There is no script for inferencing that allows others to test the model in a live Ai2thor environmnent and get a qualitative evaluation. Thus, as part of our project, we aim to provide APIs for users to create a live agent in a live Ai2thor simulator, where this agent uses pretrained models for visual navigation tasks. 
 
 
+## Input & Output Using Our API
+Input: 
+- Ai2thor Controller
+- Target Name
+- Necessary file paths (eg. Glove Embedding)
 
+Output:
+- Action ('LookUp', 'LookDown', 'RotateLeft', 'RotateRight', 'MoveAhead', or 'Done')
 
+## Demo Video
+[SAVN Agent looking for a laptop in Ai2Thor 2.2.0 Scene 210](https://youtu.be/HIuPZLSVVwY)
 
 ## Deliverables
 - A jupyter notebook that provides a simple interface for evaluating models in live Ai2thor Simulator
