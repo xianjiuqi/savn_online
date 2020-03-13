@@ -150,6 +150,8 @@ Please login in to the docker container and execute the  following command and h
 
 `sudo X -config /etc/X11/dummy-1920x1080.conf &`
 
+![AWS DISPLAY Resolution](./images/DisplayErrorResolution.png)
+
 
 
 
