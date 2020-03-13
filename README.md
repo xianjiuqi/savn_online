@@ -131,7 +131,7 @@ cat savn_results.json
 ### Known Issues on AWS Cloud :
 For some instances/ami type if the display server isn't automatically configured then you will the below error
 
-![AWS DISPLAY ISSUE](./images/NotebookHome.png)
+![AWS DISPLAY ISSUE](./images/AWSDisplayError.png)
 
 You can resolve this by following the below instructions.
 
