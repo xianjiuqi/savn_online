@@ -152,6 +152,7 @@ Please login in to the docker container and execute the  following command and h
 
 ![AWS DISPLAY Resolution](./images/DisplayErrorResolution.png)
 
+Once the error is resolved you can continue to execute the cells normally
 
 
 
