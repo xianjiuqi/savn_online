@@ -75,9 +75,11 @@ ssh -i "you-certificate-file.pem" -L 8000:localhost:8888 ubuntu@your-ec2-instanc
 ```
 - Make sure 'savn' container is up and running `docker ps -a`
 - bash into the 'savn' container by `docker exec -it savn bash`
-- Fix potential display issue by `sudo X -config /etc/X11/dummy-1920x1080.conf &`. (Do this inside the container, hit enter twice)
+- Fix potential display issue by `sudo X -config /etc/X11/dummy-1920x1080.conf &`. (Do this inside the container, hit enter twice). See "Known Issues on AWS Cloud" below.
 
 you can launch the browser and type `localhost:8000`. If a token is required, copy and paste the token displayed when you first run the container.
+
+- Open `online.ipynb` and `test-import-online.ipynb`
 
 ![AWS AMI](./images/NotebookHome.png)
 
