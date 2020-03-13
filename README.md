@@ -120,8 +120,16 @@ cat savn_results.json
 ```
 
 
+### Known Issues on AWS Cloud :
+For some instances/ami type if the display server isn't automatically configured then you will the below error
 
+![AWS DISPLAY ISSUE](./images/NotebookHome.png)
 
+You can resolve this by following the below instructions.
+
+Please login in to the docker container and execute the  following command and hit Enter
+
+`sudo X -config /etc/X11/dummy-1920x1080.conf &`
 
 
 
