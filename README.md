@@ -97,7 +97,21 @@ PLEASE NOTE : TRAINING IS VERY RESOURCE INTENSIVE AND MAY TAKE SEVERAL HOURS(10-
 1. Assume you have the EC2 instance set up as described above.
 2. Assume you have cloned the `savn-online` repo. in `savn-online` directory, delete the `data` folder by `rm -r data`. Then download the full offline environment data `wget https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz`. Be aware that this compressed file is around 13G, it decompressed into around 27G. Once download is finished, decompress with `tar -xzf data.tar.gz`. Once you are in the savn-online directory, type `ls` to confirm you are in the right directory and you have the data folder populated.
 3. If you have not download the pretrained models, please see instructions in "Set-up on local machine" to download pretrained models.
-4. Fix potential "unable to open display" error by `sudo X -config /etc/X11/dummy-1920x1080.conf &`. Again, if you encounter problems, please reach out to us.
+4. Fix potential "unable to open display" error by executing following command and hit enter at the end
+
+```
+sudo apt-get install -y xserver-xorg mesa-utils
+
+#Confirm you are in savn-online directory
+
+sudo cp xorg.conf /etc/X11/
+
+cd /etc/X11
+
+sudo /usr/bin/X :0 &
+```
+
+Again, if you encounter problems, please reach out to us.
     
     
 ### Training SAVN
