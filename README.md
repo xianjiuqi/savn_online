@@ -93,6 +93,9 @@ python full_eval.py \
     
 cat savn_results.json
 ```
+MODEL EVALUATION
+
+![TRAININGAGENTS](./images/TrainedModelEval.png)
 
 ## Input & Output Using Our API
 Input: 
