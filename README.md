@@ -1,12 +1,32 @@
-# Self Adaptive Visual Navigation
+# Visual Navigation
 
-In recent years, there has been a lot of progress in visual navigation but it is not at the level where you can call it is  state-of-art. The one distinguishing framework that is attempting to provide a state-of-art navigation framework is the Ai2thor framework which also provides physics engine, object interaction and more. (In oreder to learn more about Ai2Thor Framework  and the original work on Self-Adaptive Visual Navigation please refer to https://ai2thor.allenai.org/ and https://github.com/allenai/savn respectively.
+Visual Navigation is a task where an agent uses a RGB camera to navigate. In our task, the agent's goal is to find a target object in an indoor scene. We based our work on [SAVN](https://github.com/allenai/savn), a target driven visual navigation model trained using meta-reinforcement learning. This model is trained using scenes in [Ai2thor](https://ai2thor.allenai.org/), a virtual-enviroment framework that provides photo-realistic scenes, physics engine, object interaction, etc.
 
 ## Problem Statement
-In the savn(https://github.com/allenai/savn) repo we based on, currenlty the agent is trained and tested in an offline Ai2thro environment, created by scraping images from a live environment and it is difficult to directly use the trained navigation models to a live Ai2thor environment. As part of our project, we aim to provide APIs so that users to create a live agent in a live Ai2thor simulator, where this agent uses pretrained models for visual navigation tasks. 
+In the SAVN project, the models are trained and tested in an offline Ai2thor environment, created by scraping images and ResNet features from a live environment for training efficiency. There is no script for inferencing that allows others to test the model in a live Ai2thor environmnent and get a qualitative evaluation. Thus, as part of our project, we aim to provide APIs for users to create a live agent in a live Ai2thor simulator, where this agent uses pretrained models for visual navigation tasks. 
+
+
+## Input & Output Using Our API
+Input: 
+- Ai2thor Controller
+- Target Name
+- Necessary file paths (eg. Glove Embedding)
+
+Output:
+- Action ('LookUp', 'LookDown', 'RotateLeft', 'RotateRight', 'MoveAhead', or 'Done')
+
+## Demo Video
+[SAVN Agent looking for a laptop in Ai2Thor 2.2.0 Scene 210](https://youtu.be/HIuPZLSVVwY)
+
+## Deliverables
+- A jupyter notebook that provides a simple interface for evaluating models in live Ai2thor Simulator
+- APIs that allow users to make the agent do one 'step' at a time, and receive 'observation' from enviroment
+- Docker image
+- Dockerfile
+- Instructions for setting up training on cloud
 
 # Inference in Online Ai2Thor Environment.
-### Set-up on local machine (Tested with MacBook Pro)
+## Set-up on local machine (Recommended. Tested with macOS Mojave 10.14.6)
 
 - Clone the repository with `git clone https://github.com/xianjiuqi/savn_online.git && cd savn_online`.
 - Create a conda environment. Assume miniconda3 is installed. Python 3 is required. 
@@ -27,49 +47,113 @@ The above `data` only allows for inferencing. If you want to train and evaluate 
 
 ### See a quick demo on jupyter notebook.
 After set-up, in command line, run `jupyter notebook`
-Open `savn-online/online.ipynb` and run all the cells. On local machine, a display window will pop up, showing the scene viewed by agent.
+Open `online.ipynb` and run all the cells. On local machine, a display window will pop up, showing the scene viewed by agent.
 
-### If you want to Experiment with our Gym-like API calls, please execute the cells within the below notebook:
+### Experiment with our Gym-like API calls
+Open `test_import_online.ipynb`
 
-`test_import_online.ipynb`
+## Setup Docker on AWS
+If you just want to see how the models perform in a live Ai2thor environment, using docker on AWS is not recommended, because there is not visual display for the scenes. However, it is still doable. 
 
-### Notice
-If you want to run the demo on cloud in a Docker container, please follow instructions below. However, you may not able to get a visual display of the scene.
+- Choose the right image: Deep Learning AMI (Ubuntu 16.04) Version 26.0 (ami-025ed45832b817a35)
+
+![AWS AMI](./images/AMI.png)
+
+- This AMI comes with built support for nvidia drivers, docker environment.
+
+- Launch the EC2 instance with P2.2xlarge instance type with GPU support.
+
+- SSH into the launched EC2 instance by following instructions presented on Connect option in your AWS EC2 console.
+
+- Pull the docker image with command : `docker pull sundaramx/savn-online:1.6`
+
+- Start a container called 'savn' by  `docker run --rm  -it --name savn --privileged -p 8888:8888 --hostname localhost sundaramx/savn-online:1.6`
+
+- In a new bash terminal ssh into your AWS EC2 instance using 
+```
+ssh -i "you-certificate-file.pem" -L 8000:localhost:8888 ubuntu@your-ec2-instance.compute-1.amazonaws.com
+```
+- Make sure 'savn' container is up and running `docker ps -a`
+- bash into the 'savn' container by `docker exec -it savn bash`
+- Fix potential display issue by `sudo X -config /etc/X11/dummy-1920x1080.conf &`. (Do this inside the container, hit enter twice). See "Known Issues on AWS Cloud" below.
+
+you can launch the browser and type `localhost:8000`. If a token is required, copy and paste the token displayed when you first run the container.
+
+- Open `online.ipynb` and `test-import-online.ipynb`
+
+![AWS AMI](./images/NotebookHome.png)
 
 
 # Train and Evaluate
-We adopted instructions from https://github.com/allenai/savn
+Setting up training environment with Ai2thor on cloud is not a trivial task. Some issues may occur, such as 'cannot find display' or 'cannot find sound card'. But in our Docker image these issues are fixed.
+## Instructions for Training and Evaluating
+### Set up
+1. Your system has at least one GPU, and have `nvidia-docker` installed.
+2. Assume you have cloned the `savn-online` repo. in `savn-online` directory, delete the `data` folder by `rm -r data`. Then download the full offline environment data `wget https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz`. Be aware that this compressed file is around 13G, it decompressed into around 27G. Once download is finished, decompress with `tar -xzf data.tar.gz`. 
+3. If you have not download the pretrained models, please see instructions in "Set-up on local machine" to download pretrained models.
 
-## Setup on docker 
+4. Run `docker pull sundaramx/savn-online:1.4`
 
-Please refer the Dockerfile for creating the creating he 
+5. Start a container called `savn-train`, and mount your local `savn-online` directory to this container.
+```
+nvidia-docker run -v $PWD:/savn-online -d -it --privileged --name savn-train sundaramx/savn-online:1.4
+```
+6. Bash into the container just created 
+```
+docker exec -it savn-train bash
+```
+
+### Evaluate Pretrained SAVN
+We adopted the following instructions from [SAVN](https://github.com/allenai/savn), the repo we base our work on. 
+```
+python main.py --eval \
+    --test_or_val test \
+    --episode_type TestValEpisode \
+    --load_model pretrained_models/savn_pretrained.dat \
+    --model SAVN \
+    --gpu-ids 0 \
+    --results_json savn_test.json 
+
+cat savn_test.json
+```
+### Training SAVN
+```
+python main.py \
+    --title savn_train \
+    --model SAVN \
+    --gpu-ids 0 \
+    --workers 12 \
+    --max_ep 6000000 \
+    --ep_save_freq 100000 \
+```
+You may reduce maximum episode and save frequency by setting `--max_ep 200`, `--ep_save_freq 100`, just to verify your training environment is working.
+### Evaluate your trained models
+```
+python full_eval.py \
+    --title savn \
+    --model SAVN \
+    --results_json savn_results.json \
+    --gpu-ids 0 
+    
+cat savn_results.json
+```
 
 
+### Known Issues on AWS Cloud :
+For some instances/ami type if the display server isn't automatically configured then you will see the below error while executing the cells within jupyter notebook
 
-## Setup on AWS with docker 
+![AWS DISPLAY ISSUE](./images/AWSDisplayError.png)
 
-Choose the right image:
-Deep Learning AMI (Ubuntu 16.04) Version 26.0 (ami-025ed45832b817a35)
+You can resolve this by following the below instructions.
 
-![Image description]
+Please login in to the docker container and execute the  following command and hit Enter
 
+`sudo X -config /etc/X11/dummy-1920x1080.conf &`
 
-This AMI comes with built support for nvidia drivers, docker environment.
+![AWS DISPLAY Resolution](./images/DisplayErrorResolution.png)
 
-Launch the EC2 instance with P2.2xlarge instance type with GPU support.
-
-SSH into the launched EC2 instance by following instructions presented on Connect option.
-
-Pull the docker image with command : docker pull sundaramx/savn-online:1.4
-
-docker run --rm  -it --privileged -p 8888:8888 --hostname localhost sundaramx/savn-online:1.1
+Once the error is resolved you can continue to execute the cells normally
 
 
-on a new bash terminal ssh into your AWS EC2 instance 
-
-ssh -i "certificate file" -L 8000:localhost:8888 ubuntu@your-ec2-instance.compute-1.amazonaws.com
-
-This way you can access the jupoyter notebook on your local machine and run the cells present in the notebook to test 
-the agent.
 
 
