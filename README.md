@@ -46,11 +46,12 @@ The `data` folder in `savn-online` contains:
 The above `data` only allows for inferencing. If you want to train and evaluate the models, please refer to "Train and Evaluate" section below. 
 
 ### See a quick demo on jupyter notebook.
-After set-up, in command line, run `jupyter notebook`
-Open `online.ipynb` and run all the cells. On local machine, a display window will pop up, showing the scene viewed by agent.
+- After set-up, in command line, run `jupyter notebook`
+- Open `online.ipynb` and run all the cells. On local machine, a display window will pop up, showing the scene viewed by agent.
 
 ### Experiment with our Gym-like API calls
-Open `test_import_online.ipynb`
+- Please refer to README_DOCUMENTATION
+- Open `test_import_online.ipynb`
 
 ## Setup Docker on AWS
 If you just want to see how the models perform in a live Ai2thor environment, using docker on AWS is not recommended, because there is not visual display for the scenes. However, it is still doable. 
