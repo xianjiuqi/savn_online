@@ -66,6 +66,22 @@ python main.py \
 ```
 You may reduce maximum episode and save frequency by setting `--max_ep 200`, `--ep_save_freq 100`, just to verify your training environment is working.
 
+BELOW SCREENSHOTS ARE FROM OUR TRAINING.
+
+![TRAINING](./images/TrainedModelEval.png)
+
+TRAINING AGENTS CREATED!
+
+![TRAININGAGENTS](./images/TrainingAgentsCreated.png)
+
+TRAINING ON GPU WITH CUDA
+
+![TRAININGAGENTSONCUDA](./images/TrainingAgentsRunningOnGPUwithCUDA.png)
+
+TRAINING STATUS ON GPU
+
+![TRAININGAGENTS](./images/GPURunningDetails.png)
+
 
 ### Evaluate your trained models
 ```
