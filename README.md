@@ -101,6 +101,19 @@ Please login in to the docker container and execute the  following command and h
 
 Once the error is resolved you can continue to execute the cells normally
 
+## Reference
+```
+@InProceedings{Wortsman_2019_CVPR,
+  author={Mitchell Wortsman and Kiana Ehsani and Mohammad Rastegari and Ali Farhadi and Roozbeh Mottaghi},
+  title={Learning to Learn How to Learn: Self-Adaptive Visual Navigation Using Meta-Learning},
+  booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  month = {June},
+  year = {2019}
+}
+```
+
+## Links
+[SAVN](https://github.com/allenai/savn)
 
 
 
