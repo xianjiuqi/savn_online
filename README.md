@@ -94,7 +94,7 @@ PLEASE NOTE : TRAINING IS VERY RESOURCE INTENSIVE AND MAY TAKE SEVERAL HOURS(10-
 
 ## Instructions for Training and Evaluating
 ### Set up
-1. Your system has at least one GPU, and have `nvidia-docker` installed.
+1. Assume you have the EC2 instance set up as described above.
 2. Assume you have cloned the `savn-online` repo. in `savn-online` directory, delete the `data` folder by `rm -r data`. Then download the full offline environment data `wget https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz`. Be aware that this compressed file is around 13G, it decompressed into around 27G. Once download is finished, decompress with `tar -xzf data.tar.gz`. Once you are in the savn-online directory, type `ls` to confirm you are in the right directory and you have the data folder populated.
 3. If you have not download the pretrained models, please see instructions in "Set-up on local machine" to download pretrained models.
 4. Fix potential "unable to open display" error by `sudo X -config /etc/X11/dummy-1920x1080.conf &`. Again, if you encounter problems, please reach out to us.
