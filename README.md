@@ -31,7 +31,7 @@ Then execute the following command which will start the training.
     --gpu-ids 0 \
     --workers 12 \
     --max_ep 6000000 \
-    --ep_save_freq 100000 \`
+    --ep_save_freq 100000`
     
     
 ### Training SAVN
