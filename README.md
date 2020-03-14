@@ -88,18 +88,16 @@ you can launch the browser and type `localhost:8000`. If a token is required, co
 
 ## Training and Evaluation
 
-Setting up training environment with Ai2thor on cloud is not a trivial task. Some issues may occur, such as 'cannot find display' or 'cannot find sound card'. 
+Setting up training environment with Ai2thor on cloud is not a trivial task. Some issues may occur, such as 'cannot find display' or 'cannot find sound card'. If you encounter any issue, please reach out to us.
 
 PLEASE NOTE : TRAINING IS VERY RESOURCE INTENSIVE AND MAY TAKE SEVERAL HOURS(10-12) HOURS. ALSO TRAINING WITH IN DOCKER HAS BEEN VERY TRICKY AND WE HIGHLY RECOMMEND THAT YOU DO TRAINING DIRECTLY ON AWS EC2 INSTANCE
 
 ## Instructions for Training and Evaluating
 ### Set up
 1. Your system has at least one GPU, and have `nvidia-docker` installed.
-2. Assume you have cloned the `savn-online` repo. in `savn-online` directory, delete the `data` folder by `rm -r data`. Then download the full offline environment data `wget https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz`. Be aware that this compressed file is around 13G, it decompressed into around 27G. Once download is finished, decompress with `tar -xzf data.tar.gz`. 
+2. Assume you have cloned the `savn-online` repo. in `savn-online` directory, delete the `data` folder by `rm -r data`. Then download the full offline environment data `wget https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz`. Be aware that this compressed file is around 13G, it decompressed into around 27G. Once download is finished, decompress with `tar -xzf data.tar.gz`. Once you are in the savn-online directory, type `ls` to confirm you are in the right directory and you have the data folder populated.
 3. If you have not download the pretrained models, please see instructions in "Set-up on local machine" to download pretrained models.
-
-
-once you are in the savn-online directory, type `ls` to confirm you are in the right directory and you have the data folder populated.
+4. Fix potential "unable to open display" error by `sudo X -config /etc/X11/dummy-1920x1080.conf &`. Again, if you encounter problems, please reach out to us.
     
     
 ### Training SAVN
