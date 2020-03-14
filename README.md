@@ -111,6 +111,8 @@ cd /etc/X11
 sudo /usr/bin/X :0 &
 ```
 
+5. Python3 is required. You may use a Anaconda/Miniconda to manage the packages and Python version. But you need to give write access to the current user if you are not using `sudo` for the below training command.
+
 Again, if you encounter problems, please reach out to us.
     
     
