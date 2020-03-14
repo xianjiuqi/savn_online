@@ -126,7 +126,7 @@ python main.py \
     --max_ep 6000000 \
     --ep_save_freq 100000 \
 ```
-You may reduce maximum episode and save frequency by setting `--max_ep 200`, `--ep_save_freq 100`, just to verify your training environment is working.
+You may reduce maximum episode and save frequency by setting `--max_ep 200`, `--ep_save_freq 100`, just to verify your training environment is working. A few errors will pop up, but it may not affect training. When the process finishes, `ls trained_models` to see the trained models.
 
 BELOW SCREENSHOTS ARE FROM OUR TRAINING.
 
