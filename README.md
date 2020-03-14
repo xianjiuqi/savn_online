@@ -24,6 +24,7 @@ Output:
 - APIs that allow users to make the agent do one 'step' at a time, and receive 'observation' from enviroment
 - Docker image
 - Dockerfile
+- Instructions for training on AWS
 
 # Inference in Online Ai2Thor Environment.
 ## Set-up on local machine (Recommended. Tested with macOS Mojave 10.14.6)
@@ -57,11 +58,10 @@ The above `data` only allows for inferencing. If you want to train and evaluate 
 ## Setup Docker on AWS
 If you just want to see how the models perform in a live Ai2thor environment, using docker on AWS is not recommended, because there is not visual display for the scenes. However, it is still doable. 
 
-- Choose the right image: Deep Learning AMI (Ubuntu 16.04) Version 26.0 (ami-025ed45832b817a35)
+- Choose the right image: Deep Learning AMI (Ubuntu 16.04) Version 26.0 (ami-025ed45832b817a35). This AMI comes with built support for nvidia drivers, docker environment.
 
 ![AWS AMI](./images/AMI.png)
 
-- This AMI comes with built support for nvidia drivers, docker environment.
 
 - Launch the EC2 instance with P2.2xlarge instance type with GPU support.
 
@@ -88,8 +88,7 @@ you can launch the browser and type `localhost:8000`. If a token is required, co
 
 ## Training and Evaluation
 
-Setting up training environment with Ai2thor on cloud is not a trivial task. Some issues may occur, such as 'cannot find display' or 'cannot find sound card'. But in our Docker image these issues are fixed.
-
+Setting up training environment with Ai2thor on cloud is not a trivial task. Some issues may occur, such as 'cannot find display' or 'cannot find sound card'. 
 
 PLEASE NOTE : TRAINING IS VERY RESOURCE INTENSIVE AND MAY TAKE SEVERAL HOURS(10-12) HOURS. ALSO TRAINING WITH IN DOCKER HAS BEEN VERY TRICKY AND WE HIGHLY RECOMMEND THAT YOU DO TRAINING DIRECTLY ON AWS EC2 INSTANCE
 
