@@ -6,6 +6,78 @@ Visual Navigation is a task where an agent uses a RGB camera to navigate. In our
 In the SAVN project, the models are trained and tested in an offline Ai2thor environment, created by scraping images and ResNet features from a live environment for training efficiency. There is no script for inferencing that allows others to test the model in a live Ai2thor environmnent and get a qualitative evaluation. Thus, as part of our project, we aim to provide APIs for users to create a live agent in a live Ai2thor simulator, where this agent uses pretrained models for visual navigation tasks. 
 
 
+## Training and Evaluation
+
+Setting up training environment with Ai2thor on cloud is not a trivial task. Some issues may occur, such as 'cannot find display' or 'cannot find sound card'. But in our Docker image these issues are fixed.
+
+## Instructions for Training and Evaluating
+### Set up
+1. Your system has at least one GPU, and have `nvidia-docker` installed.
+2. Assume you have cloned the `savn-online` repo. in `savn-online` directory, delete the `data` folder by `rm -r data`. Then download the full offline environment data `wget https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz`. Be aware that this compressed file is around 13G, it decompressed into around 27G. Once download is finished, decompress with `tar -xzf data.tar.gz`. 
+3. If you have not download the pretrained models, please see instructions in "Set-up on local machine" to download pretrained models.
+
+4. Run `docker pull sundaramx/savn-online:1.4`
+
+5. Start a container called `savn-train`, and mount your local `savn-online` directory to this container.
+
+`nvidia-docker run -v $PWD:/savn-online -d -it --privileged --name savn-train sundaramx/savn-online:1.4`
+
+6. Bash into the container just created 
+```
+docker exec -it savn-train bash
+```
+
+once you are in the container app directory, type `ls` to confirm you are in the right directory and you have the data folder populated.
+
+Then execute the following command which will start the training.
+
+PLEASE NOTE : TRAINING IS VERY RESOURCE INTENSIVE AND MAY TAKE SEVERAL HOURS(10-12) HOURS.
+
+`python main.py \
+    --title savn_train \
+    --model SAVN \
+    --gpu-ids 0 \
+    --workers 6`
+    
+    
+
+### Evaluate Pretrained SAVN
+We adopted the following instructions from [SAVN](https://github.com/allenai/savn), the repo we base our work on. 
+```
+python main.py --eval \
+    --test_or_val test \
+    --episode_type TestValEpisode \
+    --load_model pretrained_models/savn_pretrained.dat \
+    --model SAVN \
+    --gpu-ids 0 \
+    --results_json savn_test.json 
+
+cat savn_test.json
+```
+### Training SAVN
+```
+python main.py \
+    --title savn_train \
+    --model SAVN \
+    --gpu-ids 0 \
+    --workers 12 \
+    --max_ep 6000000 \
+    --ep_save_freq 100000 \
+```
+You may reduce maximum episode and save frequency by setting `--max_ep 200`, `--ep_save_freq 100`, just to verify your training environment is working.
+
+
+### Evaluate your trained models
+```
+python full_eval.py \
+    --title savn \
+    --model SAVN \
+    --results_json savn_results.json \
+    --gpu-ids 0 
+    
+cat savn_results.json
+```
+
 ## Input & Output Using Our API
 Input: 
 - Ai2thor Controller
