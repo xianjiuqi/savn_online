@@ -10,6 +10,7 @@ In the SAVN project, the models are trained and tested in an offline Ai2thor env
 Input: 
 - Ai2thor Controller
 - Target Name
+- Model Name
 - Necessary file paths (eg. Glove Embedding)
 
 Output:
@@ -23,7 +24,6 @@ Output:
 - APIs that allow users to make the agent do one 'step' at a time, and receive 'observation' from enviroment
 - Docker image
 - Dockerfile
-- Instructions for setting up training on cloud
 
 # Inference in Online Ai2Thor Environment.
 ## Set-up on local machine (Recommended. Tested with macOS Mojave 10.14.6)
@@ -48,6 +48,7 @@ The above `data` only allows for inferencing. If you want to train and evaluate 
 ### See a quick demo on jupyter notebook.
 - After set-up, in command line, run `jupyter notebook`
 - Open `online.ipynb` and run all the cells. On local machine, a display window will pop up, showing the scene viewed by agent.
+- Please see the comment lines in the cell where Ai2thor controller is initiated, try target objects within corresponding scenes.
 
 ### Experiment with our Gym-like API calls
 - Please refer to README_DOCUMENTATION
@@ -83,61 +84,6 @@ you can launch the browser and type `localhost:8000`. If a token is required, co
 - Open `online.ipynb` and `test-import-online.ipynb`
 
 ![AWS AMI](./images/NotebookHome.png)
-
-
-# Train and Evaluate
-Setting up training environment with Ai2thor on cloud is not a trivial task. Some issues may occur, such as 'cannot find display' or 'cannot find sound card'. But in our Docker image these issues are fixed.
-## Instructions for Training and Evaluating
-### Set up
-1. Your system has at least one GPU, and have `nvidia-docker` installed.
-2. Assume you have cloned the `savn-online` repo. in `savn-online` directory, delete the `data` folder by `rm -r data`. Then download the full offline environment data `wget https://prior-datasets.s3.us-east-2.amazonaws.com/savn/data.tar.gz`. Be aware that this compressed file is around 13G, it decompressed into around 27G. Once download is finished, decompress with `tar -xzf data.tar.gz`. 
-3. If you have not download the pretrained models, please see instructions in "Set-up on local machine" to download pretrained models.
-
-4. Run `docker pull sundaramx/savn-online:1.4`
-
-5. Start a container called `savn-train`, and mount your local `savn-online` directory to this container.
-```
-nvidia-docker run -v $PWD:/savn-online -d -it --privileged --name savn-train sundaramx/savn-online:1.4
-```
-6. Bash into the container just created 
-```
-docker exec -it savn-train bash
-```
-
-### Evaluate Pretrained SAVN
-We adopted the following instructions from [SAVN](https://github.com/allenai/savn), the repo we base our work on. 
-```
-python main.py --eval \
-    --test_or_val test \
-    --episode_type TestValEpisode \
-    --load_model pretrained_models/savn_pretrained.dat \
-    --model SAVN \
-    --gpu-ids 0 \
-    --results_json savn_test.json 
-
-cat savn_test.json
-```
-### Training SAVN
-```
-python main.py \
-    --title savn_train \
-    --model SAVN \
-    --gpu-ids 0 \
-    --workers 12 \
-    --max_ep 6000000 \
-    --ep_save_freq 100000 \
-```
-You may reduce maximum episode and save frequency by setting `--max_ep 200`, `--ep_save_freq 100`, just to verify your training environment is working.
-### Evaluate your trained models
-```
-python full_eval.py \
-    --title savn \
-    --model SAVN \
-    --results_json savn_results.json \
-    --gpu-ids 0 
-    
-cat savn_results.json
-```
 
 
 ### Known Issues on AWS Cloud :
